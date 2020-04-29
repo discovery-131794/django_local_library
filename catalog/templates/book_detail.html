@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}
+book detail of {{ book.title }}
+{% endblock %}
+
+{% block content %}
+{% if book %}
+<h1>{{ book.title }}</h1>
+<ul>
+    <li><strong>Title: </strong>{{ book.title }}</li>
+    <li><strong>Author: </strong><a href="{{ book.author.get_absolute_url }}">{{ book.author }}</a></li>
+    <li><strong>Language: </strong>{{ book.language }}</li>
+    <li><strong>Genre: </strong>
+        {% for genre in book.genre.all %}
+        {{ genre }}
+        {% endfor %}
+    </li>
+</ul>
+<div style="margin-left: 20px; margin-top: 20px;">
+    {% for book_instance in book.bookinstance_set.all %}
+    <p>Book Instance: {{ book_instance.id }}</p>
+    <ul>
+        <li><strong>Status: </strong>{{ book_instance.get_status_display }}</li>
+        <li><strong>Due Back: </strong>{{ book_instance.due_back }}</li>
+    </ul>
+    {% endfor %}
+</div>
+{% else %}
+<p>This book does not exist now.</p>
+{% endif %}
+{% endblock %}

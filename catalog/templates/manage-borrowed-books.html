@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Manage borrowed books
+{% endblock %}
+
+{% block content %}
+<div class='borrowed-books'>
+    {% if book_instances %}
+    <table>
+        <tr><th>ID</th><th>Book Title</th><th>Due Back</th><th>Borrower</th></tr>
+        {% for book_instance in book_instances %}
+        <tr>
+            {% if book_instance.is_overdue %}
+            <td style="color: red;">{{ book_instance.pk }}</td>
+            {% else %}
+            <td>{{ book_instance.pk }}</td>
+            {% endif %}
+            <td>{{ book_instance.book.title }}</td><td>{{ book_instance.due_back|date:"SHORT_DATE_FORMAT" }}</td><td>{{ book_instance.borrower.username }}</td>
+            {% if can_mark %}
+            <td><button class='suspend'><a href="{% url 'mark' id=book_instance.pk %}">Suspend due back</a></button></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>no records</p>
+    {% endif %}
+</div>
+{% endblock %}

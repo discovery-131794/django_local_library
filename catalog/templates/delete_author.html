@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Delete Author
+{% endblock %}
+
+{% block content %}
+<form action='{{ request.path }}' method="POST">
+    {% csrf_token %}
+    <p><span>Are you sure to delete? </span><input type='submit' value="Yes"></p>
+</form>
+{% endblock %}

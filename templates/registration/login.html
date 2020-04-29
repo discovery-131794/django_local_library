@@ -1,0 +1,22 @@
+{% extends './rebase.html' %}
+{% block title %}
+<title>Login</title>
+{% endblock %}
+
+{% block content %}
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>You don't have permission to access this page, please log in using another account.</p>
+    {% else %}
+    <p>Please log in to access this page.</p>
+    {% endif %}
+{% endif %}
+{{ form.non_field_errors }}
+<form action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p><input type="submit" value="Login"></p>
+    <p><input type="hidden" name="next" value="{{ next }}"></p>
+</form>
+<p><a href="{% url 'password_reset' %}">Forget password?</a></p>
+{% endblock %}

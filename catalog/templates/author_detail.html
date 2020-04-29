@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}
+author detail
+{% endblock %}
+
+{% block content %}
+<h1>Author Detail</h1>
+<p>{{ author.get_full_name }}</p>
+<p>Birth Date: {{ author.date_of_birth }}</p>
+{% if author.date_of_death %}
+<p>Death Date: {{ author.date_of_death }}</p>
+{% endif %}
+<p>
+    {% if has_perms_change %}
+    <button class='edit'><a href="{% url 'edit-author' author.id %}">Edit</a></button>
+    {% endif %}
+    {% if has_perms_delete %}
+   <button class='detele'><a href="{% url 'delete-author' author.id %}">Detele</a></button>
+   {% endif %}
+</p>
+
+<div style="margin-top: 50px; margin-left: 50px;" class='books'>
+    <h2>Books</h2>
+    {% for book in author.book_set.all %}
+    <p>Title: <a href="{{ book.get_absolute_url }}">{{ book.title }}</a></p>
+    {% endfor %}
+</div>
+{% endblock %}

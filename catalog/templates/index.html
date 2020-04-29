@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+local library
+{% endblock %}
+
+{% block content %}
+<ul>
+    <li><a href="{% url 'show-books' %}">Book: </a>{{ book_num }}</li>
+    <li><strong>Book Instance: </strong>{{ bookinstance_num }}</li>
+    <li><strong>Avaiable Book Instance: </strong>{{ a_bookinstance_num }}</li>
+    <li><a href="{% url 'show-authors' %}">Author: </a>{{ author_num }}</li>
+    {% if user.is_staff %}
+    <li><a href="{% url 'manage-borrowed-books' %}">All borrowed books</a></li>
+    {% endif %}
+</ul>
+<p>You have visit this page <strong>{{ visit_num }}</strong> times.</p>
+{% endblock %}

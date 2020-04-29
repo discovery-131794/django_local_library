@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>update email address</title>
+        <style>
+            form {
+                text-align: center;
+                position: relative;
+            }
+            .a {
+                position: relative;
+                top: 10px;
+            }
+            .r {
+                position: relative;
+                top: 20px;
+            }
+            .s {
+                position: relative;
+                top: 30px;
+            }
+            #del {
+                display: inline;
+                position: relative;
+                left: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <form method='POST'>
+            {% csrf_token %}
+            <div class='u'>
+                <lable>userid</lable>
+                <input type="text" id='userid'>
+            </div>
+            <div class='a'>
+                <lable>address</lable>
+                <input type='text' id='address'>
+            </div>
+            <div class='r'>
+                <lable>role</lable>
+                <select id='role'>
+                    <option>requestor</option>
+                    <option>approver</option>
+                </select>
+            </div>
+            <div class='s'>
+                <input type='submit' id='su'>
+                <input type='submit' id='del' value='Delete'>
+            </div>
+        </form>
+        <script>
+            let u = document.querySelector('#userid');
+            let a = document.querySelector('#address');
+            let r = document.querySelector('#role');
+            let btn = document.querySelector('#su');
+            let del = document.querySelector('#del');
+            let csrftoken = document.querySelectorAll('input')[0].value
+            btn.onclick = function(e){
+                e.preventDefault();
+                var id = u.value;
+                var addr = a.value;
+                var rl = r.value;
+                var data = {
+                    //csrfmiddlewaretoken: document.querySelectorAll('input')[0].value,
+                    //model: 'category.emailaddress',
+                    pk: id,
+                    address: addr,
+                    role: rl    
+            }
+            //console.log(document.querySelectorAll('input')[0].value)
+            var record = JSON.stringify(data)
+            let url = 'http://127.0.0.1:8000/catalog/update/'
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', url);
+            xhr.setRequestHeader('X-CSRFToken', csrftoken)
+            xhr.onload = function(){
+                if(xhr.status===200){
+                    alert('添加成功');
+                }
+            }
+            xhr.send(record)
+        }
+        del.onclick = function(e){
+            e.preventDefault();
+            let data = {
+                address: a.value
+            }
+            data = JSON.stringify(data);
+            let xhr = new XMLHttpRequest();
+            let url = 'http://127.0.0.1:8000/catagory/delete/';
+            xhr.open('POST', url);
+            xhr.responseType = 'json'
+            xhr.setRequestHeader('X-CSRFTOKEN', csrftoken);
+            xhr.onload = function(){
+                if(xhr.status===200){
+                    alert(xhr.response.message);
+                }
+            }
+            xhr.send(data);
+        }
+        </script>
+    </body>
+</html>

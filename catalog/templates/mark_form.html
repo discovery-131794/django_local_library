@@ -1,0 +1,23 @@
+{% extends 'registration/rebase.html' %}
+
+{% block title %}
+<title>Renew Due Back</title>
+{% endblock %}
+
+{% block content %}
+<form action="{{ request.path }}" method="POST">
+    {% csrf_token %}
+    <p>
+        {{ form.id.label_tag }} {{ form.id }}
+    </p>
+    {% if form.due_back.errors %}
+    <p>{{ form.due_back.errors }}</p>
+    {% endif %}
+    <p>
+        {{ form.due_back.label_tag }} {{ form.due_back }}
+        <br>
+        <span>{{ form.due_back.help_text }}</span>
+    </p>
+    <P><input type="submit"></P>
+</form>
+{% endblock %}

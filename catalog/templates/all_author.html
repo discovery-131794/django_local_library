@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}
+All Authors
+{% endblock %}
+
+{% block content %}
+<h1>Author List</h1>
+{% if author_list %}
+<ul>
+    {% for author in author_list %}
+    <li><a href="{{ author.get_absolute_url }}">{{ author.first_name }},{{ author.last_name }}</a>({% if author.date_of_birth %}{{author.date_of_birth}}{% endif %}-
+        {% if author.date_of_death %}{{ author.date_of_death }}{% endif %})</li>
+    {% endfor %}
+</ul>
+{% if has_perms %}
+<button class='create-author'><a href="{% url 'create-author' %}">Add new author</a></button>
+{% endif %}
+{% endif %}
+{% endblock %}

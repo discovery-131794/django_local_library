@@ -1,0 +1,14 @@
+{% extends 'registration/rebase.html' %}
+
+{% block title %}
+<title>Create Author</title>
+{% endblock %}
+
+{% block content %}
+{{ form.non_field_errors }}
+<form action="{% url 'create-author' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p><input type="submit" value="Save"></p>
+</form>
+{% endblock %}
