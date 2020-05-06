@@ -21,12 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', ')-@@l61ggc+bmqv8*au#idw6^n)8%ic5e!z)4e0cm!a@!rd)km')
+SECRET_KEY = ')-@@l61ggc+bmqv8*au#idw6^n)8%ic5e!z)4e0cm!a@!rd)km'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', False)
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -78,9 +78,16 @@ WSGI_APPLICATION = 'locallibrary.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'LocalLibrary',
+        'USER': 'lladmin',
+        'PASSWORD': '131794come',
+        'HOST': 'LAPTOP-KJI3M7C7\\SQL_ZXY',
+        'OPTIONS': {
+            'driver': 'SQL Server Native Client 11.0',
         },
     }
+}
 
 
 # Password validation
@@ -141,3 +148,5 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+LOGIN_REDIRECT_URL = '/catalog/'
