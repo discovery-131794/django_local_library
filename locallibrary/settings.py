@@ -78,11 +78,7 @@ WSGI_APPLICATION = 'locallibrary.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite',
-        'NAME': 'LocalLibrary',
-        'USER': 'lladmin',
-        'PASSWORD': '131794come',
-        'HOST': 'LAPTOP-KJI3M7C7\\SQL_ZXY',
+        'ENGINE': 'django.db.backends.sqlite3',
         },
     }
 
