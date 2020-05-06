@@ -85,7 +85,6 @@ DATABASES = {
         'HOST': 'LAPTOP-KJI3M7C7\\SQL_ZXY',
         },
     }
-}
 
 
 # Password validation
