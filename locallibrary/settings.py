@@ -78,14 +78,7 @@ WSGI_APPLICATION = 'locallibrary.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'sql_server.pyodbc',
-        'NAME': 'LocalLibrary',
-        'USER': 'lladmin',
-        'PASSWORD': '131794come',
-        'HOST': 'LAPTOP-KJI3M7C7\\SQL_ZXY',
-        'OPTIONS': {
-            'driver': 'SQL Server Native Client 11.0',
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
     }
 }
 
