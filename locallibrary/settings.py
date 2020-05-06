@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ')-@@l61ggc+bmqv8*au#idw6^n)8%ic5e!z)4e0cm!a@!rd)km'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -113,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -127,5 +128,23 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Smtp host configuration
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
+# Smtp host configuration
+EMAIL_HOST = 'smtp.qq.com'
+
+EMAIL_PORT = 25
+
+EMAIL_HOST_USER = '1275760280@qq.com'
+EMAIL_HOST_PASSWORD = 'ibvpxacgaqruhhij'
+
+# Session config
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
