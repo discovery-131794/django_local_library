@@ -128,8 +128,8 @@ EMAIL_HOST = 'smtp.qq.com'
 
 EMAIL_PORT = 25
 
-EMAIL_HOST_USER = '1275760280@qq.com'
-EMAIL_HOST_PASSWORD = 'ibvpxacgaqruhhij'
+EMAIL_HOST_USER = os.environ.get('username', None)
+EMAIL_HOST_PASSWORD = os.environ.get('password', None)
 
 # Session config
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
